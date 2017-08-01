@@ -1,0 +1,24 @@
+{
+  "exception": {
+    "correlationId": "1345",
+    "exceptionCode": "MULE-JMSMQ",
+    "timeStamp": "2017-04-25 16:12:14.249",
+    "message": "Error in MQ JMS Request",
+    "causes": [
+      "The possible causes for which the request was unsuccessful:\n- WMQ queue is unavailable\n- CCSID error"
+    ],
+    "exceptionStack": [
+      {
+        "exception": {
+          "correlationId": "1345",
+          "exceptionCode": "JMSCMQ1046",
+          "timeStamp": "2017-04-25 16:12:14.290",
+          "message": "JMSCMQ1046: The character set 'ccsid:38' is not supported.",
+          "causes": [
+            "An attempt was made to send or receive a map message, stream message or text message whose body is encoded using a character set not supported by the JVM. In the case of text messages, this exception might be thrown when the body of the message is first queried, rather than at receive time."
+          ]
+        }
+      }
+    ]
+  }
+}

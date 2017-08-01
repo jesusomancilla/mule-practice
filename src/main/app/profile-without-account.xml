@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+    <http:listener-config name="profile-without-account-httpListenerConfig" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <apikit:config name="profile-without-account-config" raml="profile-without-account.raml" consoleEnabled="false" doc:name="Router"/>
+    <flow name="profile-without-account-main">
+        <http:listener config-ref="profile-without-account-httpListenerConfig" path="/api/*" doc:name="HTTP"/>
+        <apikit:router config-ref="profile-without-account-config" doc:name="APIkit Router"/>
+        <exception-strategy ref="profile-without-account-apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
+    </flow>
+    <flow name="profile-without-account-console">
+        <http:listener config-ref="profile-without-account-httpListenerConfig" path="/console/*" doc:name="HTTP"/>
+        <apikit:console config-ref="profile-without-account-config" doc:name="APIkit Console"/>
+    </flow>
+    <flow name="get:/v1.0/clients/{cis}/profile-without-account:profile-without-account-config">
+        <set-payload value="{&#xD;&#xA;    &quot;returnCodes&quot;:{&#xD;&#xA;        &quot;returnCode&quot;: &quot;00&quot;,&#xD;&#xA;        &quot;application&quot;: &quot;64000&quot;,&#xD;&#xA;        &quot;conditionCode&quot;: &quot;9987&quot;,&#xD;&#xA;        &quot;codeDescription&quot;: &quot;ACCION EXITOSA&quot;&#xD;&#xA;        },&#xD;&#xA;    &quot;clientProfileResult&quot;: {&#xD;&#xA;                    &quot;company&quot;: &quot;20&quot;,&#xD;&#xA;                    &quot;name&quot;: &quot;JAZMIN *PEREZ ISLAS&quot;,&#xD;&#xA;                    &quot;tieBreaker&quot;: &quot;129&quot;,&#xD;&#xA;                    &quot;cisNumber&quot;: &quot;100000265&quot;,&#xD;&#xA;                    &quot;nameSecondPart&quot;: null,&#xD;&#xA;                    &quot;profile&quot;: &quot;W&quot;,&#xD;&#xA;                    &quot;economicSector&quot;: &quot; 32&quot;,&#xD;&#xA;                    &quot;creditCard&quot;: null,&#xD;&#xA;                    &quot;bankClientStatus&quot;: &quot; 1&quot;,&#xD;&#xA;                    &quot;customerBranch&quot;: &quot; 99&quot;,&#xD;&#xA;                    &quot;costCenter&quot;: &quot; 99&quot;,&#xD;&#xA;                    &quot;onboardingDate&quot;: &quot; 1080130&quot;,&#xD;&#xA;                    &quot;firstPromotorCode&quot;: &quot;W0991&quot;,&#xD;&#xA;                    &quot;secondPromotorCode&quot;: &quot; W0992&quot;,&#xD;&#xA;                    &quot;rfc&quot;: &quot;PEIJ830111&quot;,&#xD;&#xA;                    &quot;SecurityCode&quot;: &quot; 0&quot;,&#xD;&#xA;                    &quot;publicityCode&quot;: &quot;Y&quot;,&#xD;&#xA;                    &quot;employeeFlag&quot;: &quot; N&quot;,&#xD;&#xA;                    &quot;language&quot;: &quot; ESP&quot;,&#xD;&#xA;                    &quot;nationality&quot;: &quot;MX&quot;,&#xD;&#xA;                    &quot;bankruptcyDate&quot;: null,&#xD;&#xA;                    &quot;birthDate&quot;: &quot;830111&quot;,&#xD;&#xA;                    &quot;civilStatus&quot;: &quot;S&quot;,&#xD;&#xA;                    &quot;sex&quot;: &quot;F&quot;,&#xD;&#xA;                    &quot;particularPhone&quot;: &quot;72828987654&quot;,&#xD;&#xA;                    &quot;genericActivity&quot;: &quot;15&quot;,&#xD;&#xA;                    &quot;workplace&quot;: &quot;HSBC&quot;,&#xD;&#xA;                    &quot;officePhone&quot;: &quot;2799997&quot;,&#xD;&#xA;                    &quot;establishmentDate&quot;: null,&#xD;&#xA;                    &quot;contactName&quot;: null,&#xD;&#xA;                    &quot;contactPhone&quot;: null,&#xD;&#xA;                    &quot;principlaContact&quot;: null,&#xD;&#xA;                    &quot;contactFax&quot;: null,&#xD;&#xA;                    &quot;firstRelationBankClient&quot;: null,&#xD;&#xA;                    &quot;secondRelationBankClient&quot;: null,&#xD;&#xA;                    &quot;thirdRelationBankClient&quot;: null,&#xD;&#xA;                    &quot;fourthRelationBankClient&quot;: null,&#xD;&#xA;                    &quot;fifthRelationBankClient&quot;: null,&#xD;&#xA;                    &quot;curp&quot;: &quot;PEMJ108013A54&quot;&#xD;&#xA;                  }&#xD;&#xA;}" doc:name="Set Payload"/>
+    </flow>
+    <apikit:mapping-exception-strategy name="profile-without-account-apiKitGlobalExceptionMapping">
+        <apikit:mapping statusCode="404">
+            <apikit:exception value="org.mule.module.apikit.exception.NotFoundException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Resource not found&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="405">
+            <apikit:exception value="org.mule.module.apikit.exception.MethodNotAllowedException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Method not allowed&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="415">
+            <apikit:exception value="org.mule.module.apikit.exception.UnsupportedMediaTypeException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="406">
+            <apikit:exception value="org.mule.module.apikit.exception.NotAcceptableException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="org.mule.module.apikit.exception.BadRequestException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+    </apikit:mapping-exception-strategy>
+</mule>

@@ -1,0 +1,12 @@
+{
+  "exception": {
+    "correlationId": "1345",
+    "exceptionCode": "MULE-BADREQ",
+    "timeStamp": "2017-05-08 10:19:15.758",
+    "message": "Bad Request generated from client",
+    "causes": [
+      "Invalid value '4000000000000000000000000000' for query parameter checkingsAccount. Value does not match pattern ^[0-9]{1,23}$"
+    ],
+    "exceptionStack": []
+  }
+}

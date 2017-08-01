@@ -1,0 +1,14 @@
+{
+  "exception": {
+    "correlationId": "1345",
+    "exceptionCode": 405,
+    "timeStamp": "2017-05-08 10:25:25.589",
+    "message": "Method not allowed",
+    "causes": [
+      "The method specified PUT is not available for this resource"
+    ],
+    "exceptionStack": [
+      
+    ]
+  }
+}

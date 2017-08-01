@@ -1,0 +1,14 @@
+{
+  "exception": {
+    "correlationId": "1345",
+    "exceptionCode": "MULE-NOTFOUND",
+    "timeStamp": "2017-05-08 10:28:01.154",
+    "message": "Resource was not found",
+    "causes": [
+      "The resource /v1.0/checkings-account/profile was not found for this application"
+    ],
+    "exceptionStack": [
+      
+    ]
+  }
+}

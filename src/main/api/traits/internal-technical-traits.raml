@@ -1,0 +1,53 @@
+headers: 
+  X-HSBC-Locale:
+    description: Locale
+    example: "es_MX"
+    pattern: "^[a-zA-Z0-9_]+$"
+    required: true
+  X-HSBC-Chnl-CountryCode:
+    description: Country Code
+    example: "MX"
+    pattern: "^[a-zA-Z]+$"
+    required: true                
+  X-HSBC-Chnl-Group-Member:
+    description: Group Member
+    example: "HBMX"
+    pattern: "^[a-zA-Z]+$"
+    required: true
+  X-HSBC-User-Id:
+    description: User Id
+    example: "C12345678"
+    pattern: "^[a-zA-Z0-9_-]+$"
+    required: true
+  X-HSBC-CAM-Level:
+    description: CAM Level - 10/20/30/40
+    example: "40"
+    pattern: "^[0-9]+$"
+    required: true
+  X-HSBC-Channel-Id:
+    description: Channel Id - OHI/OHCC/OHB
+    example: "OHI"
+    pattern: "^[a-zA-Z0-9]+$"
+    required: true
+  X-HSBC-Src-Device-Id:
+    description: Device Id
+    example: "1234"
+    pattern: "^[a-zA-Z0-9.:-]+$"
+    required: true
+  X-HSBC-Session-Correlation-Id:
+    description: Session Correlation ID
+    example: "1234"
+    required: false
+  X-HSBC-Src-UserAgent:
+    description: User Agent
+    example: "Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405"
+    required: true
+  X-HSBC-Request-Correlation-Id:
+    description: Request Correlation ID
+    example: "1345"
+    required: true
+  X-HSBC-IP-Id:
+    description: IP ID
+    example: "1.1.1."
+    #pattern: "^[a-zA-Z0-9_-]+$"
+    required: true

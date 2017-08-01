@@ -1,0 +1,69 @@
+#%RAML 0.8
+baseUri: https://anypoint.systems.uk.hsbc/raml-mocking-service-site/mocks/d8e961be-182d-4573-b8f5-2bd2e63ffab9
+title: CIS Clients
+version: 1.0
+mediaType: application/json
+
+traits:
+  - common-header: !include traits/internal-technical-traits.raml
+  - common-params:
+      queryParameters:
+        branch:
+          required: true
+          type: string
+          example: "99934"
+          pattern: "^[0-9]{5}$"
+        company:
+          required: true
+          type: string
+          example: "20"
+          pattern: "^[0-9a-zA-Z]{1,5}$"
+  - tieBraker-params:
+      queryParameters:
+        name:
+            required: true
+            type: string
+            example: Garcia Canton
+        tieBraker:
+          description: Use with client name, not necessary if using CIS
+          required: true
+          type: string
+          example: "129"
+          pattern: "^[0-9]{3}$"
+  - common-responses:
+      responses:
+        400:
+          body:
+            application/json:
+              example: !include examples/errors/example-400-interface.json
+        401:
+        404:
+          body:
+            application/json:
+              example: !include examples/errors/example-404-interface.json
+        405:
+          body:
+            application/json:
+              example: !include examples/errors/example-405-interface.json
+        407:
+        500:
+          body:
+            application/json:
+               example: !include examples/errors/example-500-mq.json
+
+/v1.0:
+  /clients:
+    /{cis}:
+      uriParameters:
+        cis:
+          type: string
+          pattern: "^[0-9]{1,15}$"       
+          
+      /profile-without-account:        
+        is : [common-header,common-params,common-responses]
+        get :
+          responses:
+            200:
+              body:
+                application/json:
+                  example: !include examples/core/profile-without-account.json
